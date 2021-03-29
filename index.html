@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <script src="./JS_Folder/script.js" defer></script>
-    <title>Torre de Hanoi</title>
+    <title>Tower of Hanoi</title>
 </head>
 <body>
     <div class="gameContainer">
@@ -24,13 +24,19 @@
                 <li>Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack or on an empty rod.</li>
                 <li>No larger disk may be placed on top of a smaller disk.</li>
             </ol>
-            <p>If you're in Mobile Mode, please, swith to Lying Mode.</p>
+            <p id="startWarning" class="hidden">Please rotate your device.</p>
             <input id="gameStart" class="gameStart" type="button" value="Start Game"/>
         </div>
         <div class="towersContainer">
-            <div id="tower1" class="towers"></div>
-            <div id="tower2" class="towers"></div>
-            <div id="tower3" class="towers"></div>
+            <div id="fatherTower1" class="fatherTower">
+                <div id="tower1" class="towers"></div>
+            </div>
+            <div id="fatherTower2" class="fatherTower">
+                <div id="tower2" class="towers"></div>
+            </div>
+            <div id="fatherTower3" class="fatherTower">
+                <div id="tower3" class="towers"></div>
+            </div>
         </div>
     </div>
 </body>
