@@ -99,7 +99,6 @@ body {
 .towersContainer {
     display: flex;
     justify-content: space-around;
-    box-shadow: inset 0px 0px 20px rgb(20, 20, 20);
     height: 333px;
 }
 
@@ -117,10 +116,13 @@ body {
     }
 
 .towers {
+    position: absolute;
     display: flex;
     flex-direction: column;
+    align-self: center;
     width: 10px;
     height: 160px;
+    z-index: -1;
 
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -142,11 +144,13 @@ body {
     }
 
 .fatherTower {
-    margin-top: 173px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     width: 120px;
     height: 160px;
+    margin-top: 172px;
 }
 
 /* CLASSE DE AVISO PARA DEITAR O CELULAR */
