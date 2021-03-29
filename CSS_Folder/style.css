@@ -12,14 +12,14 @@ body {
     display: flex;
     flex-direction: column;
     border: 4px solid var(--colorOne);
-    min-height: 94vh;
+    min-height: 333px;
 }
 
 .gameMenu {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 94vh;
+    height: 333px;
     overflow: auto;
 
     border-bottom: 4px solid var(--colorOne);
@@ -100,7 +100,7 @@ body {
     display: flex;
     justify-content: space-around;
     box-shadow: inset 0px 0px 20px rgb(20, 20, 20);
-    height: 94vh;
+    height: 333px;
 }
 
     .towersContainer::after {
@@ -142,10 +142,9 @@ body {
     }
 
 .fatherTower {
-    margin-top: 180px;
+    margin-top: 173px;
     display: flex;
     justify-content: center;
-
     width: 120px;
     height: 160px;
 }
