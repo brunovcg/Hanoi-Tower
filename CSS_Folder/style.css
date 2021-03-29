@@ -155,3 +155,66 @@ body {
         display: none;
     }
 /* ------------------------------------- */
+
+
+@media (max-width: 560px) {
+
+.gameContainer{
+    height: 100vh;
+}
+
+.hidden {
+
+    display:block;
+}
+
+.gameContainer{
+    position: relative;
+}
+
+#warningContainer {
+position: absolute;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background-color: var(--colorZero) ;
+width: 100%;
+height: 100%;
+
+}
+
+#startWarning {
+    color: var(--colorOne);
+}
+
+#imgRotate {
+    width: 180px;
+    height: 180px;
+    color: red;
+}
+
+.towersContainer::after {
+display: none;
+
+}
+
+#startWarning {
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Dela Gothic One', cursive ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
