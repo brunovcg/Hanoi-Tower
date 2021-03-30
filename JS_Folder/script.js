@@ -21,6 +21,21 @@ let firstDivTower1;
 let firstDivTower2;
 let firstDivTower3;
 
+const createTowers = () => {
+    let counter = 1;
+
+    while (counter <= 3) {
+        let newTower = document.createElement('div');
+        newTower.setAttribute('id', `tower${counter}`)
+        newTower.classList.add('towers');
+
+        document.getElementById(`fatherTower${counter}`).appendChild(newTower);
+        counter ++;
+    };
+};
+
+createTowers();
+
 const createDisk = (targetTowerNumber, position) => {
     const targetTower = document.getElementById(`fatherTower${targetTowerNumber}`);
     let newDisk = document.createElement('div');
@@ -29,7 +44,6 @@ const createDisk = (targetTowerNumber, position) => {
         case 1:
             newDisk.style.background = `rgb(100, 150, 200)`;
             newDisk.style.border = '1px solid var(--colorOne)';
-            newDisk.style.transition = '0.5s';
 
             newDisk.style.width = '120px';
             newDisk.style.height = '20px';
@@ -39,7 +53,6 @@ const createDisk = (targetTowerNumber, position) => {
         case 2:
             newDisk.style.background = `rgb(50, 100, 150)`;
             newDisk.style.border = '1px solid var(--colorOne)';
-            newDisk.style.transition = '0.5s';
 
             newDisk.style.width = '100px';
             newDisk.style.height = '20px';
@@ -49,7 +62,6 @@ const createDisk = (targetTowerNumber, position) => {
         case 3:
             newDisk.style.background = `rgb(0, 50, 100)`;
             newDisk.style.border = '1px solid var(--colorOne)';
-            newDisk.style.transition = '0.5s';
 
             newDisk.style.width = '80px';
             newDisk.style.height = '20px';
@@ -59,7 +71,6 @@ const createDisk = (targetTowerNumber, position) => {
         case 4:
             newDisk.style.background = `rgb(0, 0, 50)`;
             newDisk.style.border = '1px solid var(--colorOne)';
-            newDisk.style.transition = '0.5s';
 
             newDisk.style.width = '60px';
             newDisk.style.height = '20px';
@@ -69,7 +80,6 @@ const createDisk = (targetTowerNumber, position) => {
         case 5:
             newDisk.style.background = `rgb(0, 0, 0)`;
             newDisk.style.border = '1px solid var(--colorOne)';
-            newDisk.style.transition = '0.5s';
 
             newDisk.style.width = '40px';
             newDisk.style.height = '20px';
@@ -87,21 +97,21 @@ const createDisk = (targetTowerNumber, position) => {
             firstDivTower1 = fatherTower1.children[0].id;
             if (lastDivTower1 !== null) {
                 lastDivTower1.style.marginBottom = '10px';
-            }
+            };
             break;
         case 2:
             lastDivTower2 = fatherTower2.children[fatherTower2.children.length - 2];
             firstDivTower2 = fatherTower2.children[0].id;
             if (lastDivTower2 !== null) {
                 lastDivTower2.style.marginBottom = '10px';
-            }
+            };
             break;
         case 3:
             lastDivTower3 = fatherTower3.children[fatherTower3.children.length - 2];
             firstDivTower3 = fatherTower3.children[0].id;
             if (lastDivTower3 !== null) {
                 lastDivTower3.style.marginBottom = '10px';
-            }
+            };
             break;
     };
 };
@@ -119,21 +129,21 @@ const destroyDisk = (targetTowerNumber, position) => {
             firstDivTower1 = fatherTower1.children[0].id;
             if (lastDivTower1 !== null) {
                 lastDivTower1.style.marginBottom = '10px';
-            }
+            };
             break;
         case 2:
             lastDivTower2 = fatherTower2.children[fatherTower2.children.length - 2];
             firstDivTower2 = fatherTower2.children[0].id;
             if (lastDivTower2 !== null) {
                 lastDivTower2.style.marginBottom = '10px';
-            }
+            };
             break;
         case 3:
             lastDivTower3 = fatherTower3.children[fatherTower3.children.length - 2];
             firstDivTower3 = fatherTower3.children[0].id;
             if (lastDivTower3 !== null) {
                 lastDivTower3.style.marginBottom = '10px';
-            }
+            };
             break;
     };
 };
