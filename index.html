@@ -19,7 +19,7 @@
         </div>
         <div class="gameMenu">
             <div class="titleAndImg">
-                <h1>Tower of Hanoi</h1>
+                <h1 id="teste">Tower of Hanoi</h1>
                 <img src="./Assets/favicon.png">
             </div>
             <h2>GAME RULES</h2>
@@ -31,13 +31,17 @@
             <input id="gameStart" class="gameStart" type="button" value="Start Game"/>
         </div>
         <div id="scoreAndMovesCount" class="scoreAndMovesCount"></div>
-        <div class="towersContainer">
+        <div class="towersContainer" id="popUp">
             <div id="fatherTower1" class="fatherTower">
             </div>
             <div id="fatherTower2" class="fatherTower">
             </div>
             <div id="fatherTower3" class="fatherTower">
             </div>
+        <article id="popUpWin">
+            <h3 id="winTitle">You Win!</h3>
+            <span id="winMsg"></span>
+        </article>
         </div>
     </div>
 </body>
