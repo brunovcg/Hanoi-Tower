@@ -1,6 +1,7 @@
 // CALLING HTML ELEMENTS ---------------------------------------------
 const switchWarning = document.getElementById('startWarning');
 const gameStartButton = document.getElementById('gameStart');
+const gameScoreAndMovesCounter = document.getElementById('scoreAndMovesCount');
 
 const fatherTower1 = document.getElementById('fatherTower1');
     const tower1 = document.getElementById('tower1');
@@ -21,6 +22,8 @@ let firstDivTower1;
 let firstDivTower2;
 let firstDivTower3;
 
+let itsAWin = false;
+
 const createTowers = () => {
     let counter = 1;
 
@@ -33,7 +36,6 @@ const createTowers = () => {
         counter ++;
     };
 };
-
 createTowers();
 
 const createDisk = (targetTowerNumber, position) => {
@@ -94,21 +96,21 @@ const createDisk = (targetTowerNumber, position) => {
     switch (targetTowerNumber) {
         case 1:
             lastDivTower1 = fatherTower1.children[fatherTower1.children.length - 2];
-            firstDivTower1 = fatherTower1.children[0].id;
+            firstDivTower1 = fatherTower1.children[0];
             if (lastDivTower1 !== null) {
                 lastDivTower1.style.marginBottom = '10px';
             };
             break;
         case 2:
             lastDivTower2 = fatherTower2.children[fatherTower2.children.length - 2];
-            firstDivTower2 = fatherTower2.children[0].id;
+            firstDivTower2 = fatherTower2.children[0];
             if (lastDivTower2 !== null) {
                 lastDivTower2.style.marginBottom = '10px';
             };
             break;
         case 3:
             lastDivTower3 = fatherTower3.children[fatherTower3.children.length - 2];
-            firstDivTower3 = fatherTower3.children[0].id;
+            firstDivTower3 = fatherTower3.children[0];
             if (lastDivTower3 !== null) {
                 lastDivTower3.style.marginBottom = '10px';
             };
@@ -126,21 +128,21 @@ const destroyDisk = (targetTowerNumber, position) => {
     switch (targetTowerNumber) {
         case 1:
             lastDivTower1 = fatherTower1.children[fatherTower1.children.length - 2];
-            firstDivTower1 = fatherTower1.children[0].id;
+            firstDivTower1 = fatherTower1.children[0];
             if (lastDivTower1 !== null) {
                 lastDivTower1.style.marginBottom = '10px';
             };
             break;
         case 2:
             lastDivTower2 = fatherTower2.children[fatherTower2.children.length - 2];
-            firstDivTower2 = fatherTower2.children[0].id;
+            firstDivTower2 = fatherTower2.children[0];
             if (lastDivTower2 !== null) {
                 lastDivTower2.style.marginBottom = '10px';
             };
             break;
         case 3:
             lastDivTower3 = fatherTower3.children[fatherTower3.children.length - 2];
-            firstDivTower3 = fatherTower3.children[0].id;
+            firstDivTower3 = fatherTower3.children[0];
             if (lastDivTower3 !== null) {
                 lastDivTower3.style.marginBottom = '10px';
             };
@@ -165,5 +167,11 @@ const destroyDisk = (targetTowerNumber, position) => {
 // createDisk(3, 3)
 // createDisk(3, 4)
 // createDisk(3, 5)
+
+
+const startTimer = () => {
+    let timer = 0;
+    let gameTiming = setInterval(() => {timer ++; gameScoreAndMovesCounter.innerHTML = `Timing: ${timer}s<br>Moves: 00`; if (itsAWin) {clearInterval(gameTiming)}}, 1000);
+};
 
 // -------------------------------------------------------------------
