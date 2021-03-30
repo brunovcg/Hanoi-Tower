@@ -24,6 +24,7 @@ let firstDivTower3;
 
 let itsAWin = false;
 
+
 const createTowers = () => {
     let counter = 1;
 
@@ -36,7 +37,13 @@ const createTowers = () => {
         counter ++;
     };
 };
-createTowers();
+
+
+const startTimer = () => {
+    let timer = 0;
+    let gameTiming = setInterval(() => {timer ++; gameScoreAndMovesCounter.innerHTML = `Timing: ${timer}s<br>Moves: 00`; if (itsAWin) {clearInterval(gameTiming)}}, 1000);
+};
+
 
 const createDisk = (targetTowerNumber, position) => {
     const targetTower = document.getElementById(`fatherTower${targetTowerNumber}`);
@@ -150,28 +157,23 @@ const destroyDisk = (targetTowerNumber, position) => {
     };
 };
 
-// createDisk(1, 1)
-// createDisk(1, 2)
-// createDisk(1, 3)
-// createDisk(1, 4)
-// createDisk(1, 5)
 
-// createDisk(2, 1)
-// createDisk(2, 2)
-// createDisk(2, 3)
-// createDisk(2, 4)
-// createDisk(2, 5)
+// BRUNO----------------------------------------------------
+document.getElementById("gameStart").onclick = function() { 
 
-// createDisk(3, 1)
-// createDisk(3, 2)
-// createDisk(3, 3)
-// createDisk(3, 4)
-// createDisk(3, 5)
+    startTimer()
+    createTowers()
+    createDisk(1, 1)
+    createDisk(1, 2)
+    createDisk(1, 3)
+    createDisk(1, 4)
+    createDisk(1, 5)
+
+}
 
 
-const startTimer = () => {
-    let timer = 0;
-    let gameTiming = setInterval(() => {timer ++; gameScoreAndMovesCounter.innerHTML = `Timing: ${timer}s<br>Moves: 00`; if (itsAWin) {clearInterval(gameTiming)}}, 1000);
-};
+
+
+
 
 // -------------------------------------------------------------------
