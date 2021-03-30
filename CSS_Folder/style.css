@@ -170,6 +170,45 @@ body {
     .hidden {
         display: none;
     }
+
+/* POP UP DA VITORIA */
+
+    #popUp{
+    position: relative;
+    }
+
+
+    #popUpWin{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(165, 165, 165, 0.781);
+    }
+
+    #winTitle {
+
+        color: rgb(240, 241, 124);
+        font-family: 'Dela Gothic One', cursive;
+        font-size: 50px;
+        margin-bottom: 10px;
+    }
+
+    #winMsg {
+        color:rgba(165, 165, 165);
+        font-family: 'Dela Gothic One', cursive;
+        font-size: 20px;
+        background-color: rgb(230, 230, 230);
+        padding: 5px;
+        
+    }
+
+
+
+
 /* ------------------------------------- */
 
 
@@ -183,6 +222,7 @@ body {
 .hidden {
 
     display:block;
+    z-index: 5;
 }
 
 #warningContainer {
@@ -218,8 +258,6 @@ display: none;
     font-family: 'Dela Gothic One', cursive ;
 }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 8d1672cc56af1cf589de422d10ee6e7ff0442e14
+
+
