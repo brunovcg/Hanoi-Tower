@@ -23,7 +23,7 @@ let firstDivTower2;
 let firstDivTower3;
 
 let itsAWin = false;
-let gameTiming = ""
+let timer = 0;
 
 
 const createTowers = () => {
@@ -41,10 +41,9 @@ const createTowers = () => {
 
 
 const startTimer = () => {
-    let timer = 0;
-    gameTiming = setInterval(() => {timer ++; gameScoreAndMovesCounter.innerHTML = `Timing: ${timer}s<br>Moves: ${counter}`; if (itsAWin) {clearInterval(gameTiming)}}, 1000);
+    gameScoreAndMovesCounter.innerHTML = `Timing: ${timer}s<br>Moves: ${counter}`;
+    let gameTimer = setInterval(() => {gameScoreAndMovesCounter.innerHTML = `Timing: ${timer}s<br>Moves: ${counter}`; timer ++; if (itsAWin) {clearInterval(gameTimer)}}, 1000);
 };
-
 
 const createDisk = (targetTowerNumber, position) => {
     const targetTower = document.getElementById(`fatherTower${targetTowerNumber}`);
@@ -135,6 +134,7 @@ const destroyDisk = (targetTowerNumber, position) => {
     
     switch (targetTowerNumber) {
         case 1:
+            if(fatherTower1.childElementCount === 1) {break}
             lastDivTower1 = fatherTower1.children[fatherTower1.children.length - 2];
             firstDivTower1 = fatherTower1.children[0];
             if (lastDivTower1 !== null) {
@@ -142,13 +142,16 @@ const destroyDisk = (targetTowerNumber, position) => {
             };
             break;
         case 2:
+            if(fatherTower2.childElementCount === 1) {break}
             lastDivTower2 = fatherTower2.children[fatherTower2.children.length - 2];
             firstDivTower2 = fatherTower2.children[0];
+
             if (lastDivTower2 !== null) {
                 lastDivTower2.style.marginBottom = '10px';
             };
             break;
         case 3:
+            if(fatherTower3.childElementCount === 1) {break}
             lastDivTower3 = fatherTower3.children[fatherTower3.children.length - 2];
             firstDivTower3 = fatherTower3.children[0];
             if (lastDivTower3 !== null) {
@@ -158,260 +161,133 @@ const destroyDisk = (targetTowerNumber, position) => {
     };
 };
 
-
 // BRUNO----------------------------------------------------
-document.getElementById("gameStart").onclick = function() { 
+let gamesStarted = false;
 
-    startTimer()
-    createTowers()
- 
+const starter = document.getElementById("gameStart");
+
+starter.addEventListener("click", function() {
+    if (gameStartButton.value === 'Start Game') {
+        gameStartButton.value = 'Restart Game';
+
+        startTimer()
+        createTowers()
+        
+        createDisk(1, 1)
+        createDisk(1, 2)
+        createDisk(1, 3)
+        createDisk(1, 4)
+        createDisk(1, 5)
     
-    createDisk(1, 1)
-    createDisk(1, 2)
-    createDisk(1, 3)
-    createDisk(1, 4)
-    createDisk(1, 5)
+       let resetPopUp = document.getElementById("popUpWin")
+       resetPopUp.style.display = "none"
+    
+       itsAWin = false
+       gamesStarted = true;
+    } else {
+        location.reload();
+    }
+});
 
-   let resetPopUp = document.getElementById("popUpWin")
-   resetPopUp.style.display = "none"
+const selectAndPush = selectedTowerId => {
+    let father = document.getElementById(selectedTowerId);
 
-   itsAWin = false
+    let firstChild = father.firstElementChild.id
+    
+    let tower = father.id[11];
+
+    let choice = document.getElementById(firstChild)
+
+    let thisFatherLastDisk = father.firstElementChild.id[27]
+
+    
+    if(action == "get") {
+
+        if (father.childElementCount > 1) {
+
+            choice.style.transition = 'all 1s'
+            choice.style.border = "1px yellow solid"
+            choice.style.marginBottom = "20px"
+        
+            action = "pass"
+
+            currentTower = tower
+            currentDisk = father.firstElementChild.id[27]
+        }
+
+    } else {
+        
+        if (father.childElementCount == 1) {
+            destroyDisk(parseInt(currentTower), parseInt(currentDisk))
+            createDisk(parseInt(tower), parseInt(currentDisk))
+
+            action = "get"
+
+            counter ++
+
+        } else if (father.childElementCount > 1 && parseInt(currentDisk) > parseInt(thisFatherLastDisk)) {
+            destroyDisk(parseInt(currentTower), parseInt(currentDisk))
+            createDisk(parseInt(tower), parseInt(currentDisk))
+
+            action = "get"
+
+            counter ++
+
+            if (selectedTowerId === 'fatherTower3') {
+                let checkVictory = fatherTower3.childElementCount
+                if (checkVictory >= 6){
+                    console.log("You Win")
+                    victory()
+                    itsAWin = true
+                }
+            }
+            
+            
+        } else if (selectedTowerId === `fatherTower${currentTower}`) {
+
+            destroyDisk(parseInt(currentTower), parseInt(currentDisk))
+            createDisk(parseInt(currentTower), parseInt(currentDisk))
+
+            action = "get"
+
+            
+        } else {
+            destroyDisk(parseInt(currentTower), parseInt(currentDisk))
+            createDisk(parseInt(currentTower), parseInt(currentDisk))
+
+
+            choice.style.transition = 'all 1s'
+            choice.style.border = "1px var(--colorOne) solid"
+            
+            action = "get"
+
+            counter++
+        }
+    }
 }
-
 
 let action = "get";
 let currentTower = "1";
 let currentDisk = "5";
 let counter = 0;
 
+let gaming = setInterval(() => {
+if (gamesStarted) {
 
-fatherTower1.onclick = function() {
-
-    let father = document.getElementById("fatherTower1");
-
-    let firstChild = father.firstElementChild.id
-    
-    let tower = father.id[11];
-
-    let choice = document.getElementById(firstChild)
-
-    let thisFatherLastDisk = father.firstElementChild.id[27]
-   
-    
-    if(action == "get") {
-
-        if (father.childElementCount > 1) {
-
-            choice.style.border = "1px red solid"
-            choice.style.marginBottom = "15px"
-        
-            action = "pass"
-
-            currentTower = tower
-            currentDisk = father.firstElementChild.id[27];
-
-            counter ++
-
-        } else {counter ++}
-
-
-    } else {
-        
-        if (tower == currentTower) {
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(currentTower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-
-        } else if (father.childElementCount == 1) {
-
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(tower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-
-        } else if (father.childElementCount > 1 && Number(currentDisk) > Number(thisFatherLastDisk)) {
-
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(tower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-            
-        } else {        
-
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(currentTower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-
-        }
-    }
+    fatherTower1.addEventListener("click", function() {selectAndPush("fatherTower1")});
+    fatherTower2.addEventListener("click", function() {selectAndPush("fatherTower2")});
+    fatherTower3.addEventListener("click", function() {selectAndPush("fatherTower3")});
+    fatherTower1.style.cursor = 'pointer';
+    fatherTower2.style.cursor = 'pointer';
+    fatherTower3.style.cursor = 'pointer';
+    clearInterval(gaming)
 }
-
-
-fatherTower2.onclick = function() {
-
-    let father = document.getElementById("fatherTower2");
-
-    let firstChild = father.firstElementChild.id
-    
-    let tower = father.id[11];
-
-    let choice = document.getElementById(firstChild)
-
-    let thisFatherLastDisk = father.firstElementChild.id[27]
-   
-    
-    if(action == "get") {
-
-        if (father.childElementCount > 1) {
-
-            choice.style.border = "1px red solid"
-            choice.style.marginBottom = "15px"
-        
-            action = "pass"
-
-            currentTower = tower
-            currentDisk = father.firstElementChild.id[27];
-
-            counter ++
-
-        } else {counter ++}
-
-
-    } else {
-
-        
-        if (tower == currentTower) {
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(currentTower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-
-        } else if (father.childElementCount == 1) {
-
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(tower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-
-
-        } else if (father.childElementCount > 1 && Number(currentDisk) > Number(thisFatherLastDisk)) {
-
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(tower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-            
-
-        } else {        
-
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(currentTower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-        }
-    }
-}
-
-
-fatherTower3.onclick = function() {
-
-    let father = document.getElementById("fatherTower3");
-
-    let firstChild = father.firstElementChild.id
-    
-    let tower = father.id[11];
-
-    let choice = document.getElementById(firstChild)
-
-    let thisFatherLastDisk = father.firstElementChild.id[27]
-   
-    
-    if(action == "get") {
-
-        if (father.childElementCount > 1) {
-
-            choice.style.border = "1px red solid"
-            choice.style.marginBottom = "15px"
-        
-            action = "pass"
-
-            currentTower = tower
-            currentDisk = father.firstElementChild.id[27];
-
-            counter ++
-
-        } else {counter ++}
-
-
-    } else {
- 
-        if (tower == currentTower) {
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(currentTower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-
-        } else if (father.childElementCount == 1) {
-
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(tower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-
-        } else if (father.childElementCount > 1 && Number(currentDisk) > Number(thisFatherLastDisk)) {
-
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(tower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-
-            let checkVictory = fatherTower3.childElementCount
-            if (checkVictory >= 6){
-                console.log("You Win")
-                victory()
-                itsAWin = true
-                          
-            }
-
-        } else {        
-
-            destroyDisk(currentTower, Number(currentDisk))
-            createDisk(currentTower,Number(currentDisk))
-
-            action = "get"
-
-            counter ++
-        }
-    }
-}
+}, 100);
 
 function victory() {
 let span = document.getElementById("winMsg")
-span.innerHTML =  `You took  ${counter}  moves and ${gameTiming} seconds`
+span.innerHTML =  `You took  ${counter}  moves and ${timer} seconds`
 
 let resetPopUp = document.getElementById("popUpWin")
-resetPopUp.style.display = "flex"}
+resetPopUp.style.display = "flex"
+};
